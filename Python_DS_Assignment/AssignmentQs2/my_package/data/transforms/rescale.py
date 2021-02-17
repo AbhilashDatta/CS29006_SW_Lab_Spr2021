@@ -1,5 +1,8 @@
 #Imports
-
+import PIL
+import PIL.Image as Img
+import numpy as np
+import cv2
 
 class RescaleImage(object):
     '''
@@ -15,6 +18,7 @@ class RescaleImage(object):
         '''
 
         # Write your code here
+        self.output_size = output_size
 
     def __call__(self, image):
         '''
@@ -28,3 +32,8 @@ class RescaleImage(object):
         '''
 
         # Write your code here
+        if not isinstance(image,np.ndarray):
+            image = np.asarray(image)
+
+        image = cv2.resize(image,self.output_size)
+        return image

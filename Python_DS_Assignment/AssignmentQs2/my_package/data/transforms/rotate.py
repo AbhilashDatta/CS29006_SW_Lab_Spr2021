@@ -1,5 +1,8 @@
 #Imports
-
+import PIL
+import PIL.Image as Img
+import numpy as np
+from scipy import ndimage
 
 class RotateImage(object):
     '''
@@ -13,8 +16,9 @@ class RotateImage(object):
         '''
         
         # Write your code here
+        self.angle = degrees
 
-    def __call__(self, sample):
+    def __call__(self, image):
         '''
             Arguments:
             image (numpy array or PIL image)
@@ -24,3 +28,9 @@ class RotateImage(object):
         '''
 
         # Write your code here
+        if not isinstance(image,np.ndarray):
+            image = np.asarray(image)
+
+        image = ndimage.rotate(image,-1*self.angle,reshape = True)
+        return image
+
